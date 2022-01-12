@@ -31,9 +31,76 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Product obj)
         {
-            _db.Products.Add(obj);
+            if(ModelState.IsValid)
+            {
+                _db.Products.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(obj);
+        }
+
+        //GET Delete
+        public IActionResult Delete(int? id)
+        {
+            if(id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.Products.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        //POST Delete
+        public IActionResult DeletePost(int? id)
+        {
+            var obj = _db.Products.Find(id);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _db.Products.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
+
+        }
+
+        //GET Update
+        public IActionResult Update(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.Products.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        //POST Update
+        public IActionResult UpdatePost(Product obj)
+        {
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _db.Products.Update(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+
         }
     }
 }

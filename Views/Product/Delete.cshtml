@@ -2,15 +2,16 @@
 
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Delete";
 }
 
 
-<form method="post" asp-action="Create">
+<form method="post" asp-action="DeletePost">
     <div class="border p-3 mt-5">
+        <input asp-for="Id" hidden />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="from-group row">
-            <h2 class="text-black-50 text-center pl-3">Dodaj nowy produkt</h2>
+            <h2 class="text-black-50 text-center pl-3">Usuń produkt</h2>
         </div>
         <div class="row">
             <div class="col-12">
@@ -24,18 +25,16 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-6">
-                        <input asp-for="ProductName" class="form-control"/>
-                        <span asp-validation-for="ProductName" class="text-danger"></span>
+                        <input asp-for="ProductName" disabled class="form-control" />
                     </div>
                     <div class="col-6">
-                        <input asp-for="ProductPrice" class="form-control" />
-                        <span asp-validation-for="ProductPrice" class="text-danger"></span>
+                        <input asp-for="ProductPrice" disabled class="form-control" />
 
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-6 text-center">
-                        <input type="submit" class="btn btn-primary" value="Dodaj produkt"/>
+                        <input type="submit" class="btn btn-danger" value="Usuń" />
                     </div>
                     <div class="col-6 text-center">
                         <input class="btn btn-success" asp-controller="Product" asp-action="Index" value="Powrót" />
@@ -50,3 +49,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+

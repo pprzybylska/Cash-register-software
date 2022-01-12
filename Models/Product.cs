@@ -12,8 +12,11 @@ namespace WebApplication2.Models
         [Key]
         public int Id { get; set; }
         [DisplayName("Nazwa produktu:")]
+        [Required]
         public string ProductName { get; set; }
         [DisplayName("Cena produktu:")]
+        [Required]
+        [Range(0, int.MaxValue, ErrorMessage = "Cena musi być liczbą dodatnią")]
         public int ProductPrice { get; set; }
 
 
