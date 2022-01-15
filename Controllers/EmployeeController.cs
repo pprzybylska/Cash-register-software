@@ -8,32 +8,33 @@ using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
 {
-    public class ProductController : Controller
+    public class EmployeeController : Controller
     {
+
         private readonly ApplicationDbContext _db;
 
-        public ProductController(ApplicationDbContext db)
+        public EmployeeController(ApplicationDbContext db)
         {
-            _db = db;
+           _db = db;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Product> objList = _db.Products;
+            IEnumerable<Employee> objList = _db.Employees;
             return View(objList);
         }
-
         public IActionResult Create()
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Product obj)
+        public IActionResult Create(Employee obj)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                _db.Products.Add(obj);
+                _db.Employees.Add(obj);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -43,11 +44,11 @@ namespace WebApplication2.Controllers
         //GET Delete
         public IActionResult Delete(int? id)
         {
-            if(id == null || id == 0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
-            var obj = _db.Products.Find(id);
+            var obj = _db.Employees.Find(id);
             if (obj == null)
             {
                 return NotFound();
@@ -61,13 +62,13 @@ namespace WebApplication2.Controllers
         //POST Delete
         public IActionResult DeletePost(int? id)
         {
-            var obj = _db.Products.Find(id);
+            var obj = _db.Employees.Find(id);
 
             if (obj == null)
             {
                 return NotFound();
             }
-            _db.Products.Remove(obj);
+            _db.Employees.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
 
@@ -80,7 +81,7 @@ namespace WebApplication2.Controllers
             {
                 return NotFound();
             }
-            var obj = _db.Products.Find(id);
+            var obj = _db.Employees.Find(id);
             if (obj == null)
             {
                 return NotFound();
@@ -91,13 +92,13 @@ namespace WebApplication2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //POST Update
-        public IActionResult UpdatePost(Product obj)
+        public IActionResult UpdatePost(Employee obj)
         {
             if (obj == null)
             {
                 return NotFound();
             }
-            _db.Products.Update(obj);
+            _db.Employees.Update(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
 
