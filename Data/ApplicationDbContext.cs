@@ -17,5 +17,7 @@ namespace WebApplication2.Data
         public DbSet<Product> Products{ get; set; }
         public DbSet<Employee> Employees{ get; set; }
 
+        public DbSet<Bon> Bony { get; set; }
+
     }
 }
