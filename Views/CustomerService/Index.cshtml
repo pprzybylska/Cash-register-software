@@ -12,8 +12,14 @@
         </div>
         <div class="col">
             @{
-                Html.RenderPartial("DisplayCart", Model.Cart);
+                Html.RenderPartial("DisplayBons", Model.Bons);
             }
         </div>
     </div>
+    <div class="row">
+        @{
+            Html.RenderPartial("DisplayCart", Model.Cart);
+        }
+    </div>
+    <div asp-controller="CustomerService" asp-action="Sum"></div>
 </div>

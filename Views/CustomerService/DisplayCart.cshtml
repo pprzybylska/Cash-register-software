@@ -10,6 +10,7 @@
             <th scope="col">Nazwa Produktu</th>
             <th scope="col">Cena Produktu</th>
             <th scope="col">Ilość</th>
+            <th scope="col">Cena</th>
             <th scope="col">Opcje</th>
         </tr>
     </thead>
@@ -22,6 +23,7 @@
             <td>@cartitem.Product.ProductName</td>
             <td>@cartitem.Product.ProductPrice</td>
             <td>@cartitem.Amount</td>
+            <td>@cartitem.Price</td>
             <td class="tab">
                 <div class="col-6">
                     <a asp-controller="CustomerService" asp-action="Delete" asp-route-Id="@cartitem.Id" asp-for="Id" class="btn btn-danger" role="button">Usuń</a>

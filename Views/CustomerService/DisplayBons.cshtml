@@ -1,0 +1,29 @@
+﻿@model IEnumerable<WebApplication2.Models.Bon>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Wartość</th>
+            <th scope="col">Produkt</th>
+            <th scope="col">Opcje</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var bon in Model)
+        {
+            <tr>
+                <td>@bon.Value</td>
+                <td>@bon.product.ProductName</td>
+                <td class="tab">
+                    <div class="col-6">
+                        <a asp-controller="CustomerService" asp-action="UseBon" asp-route-Id="@bon.Id" asp-for="Id" class="btn btn-danger" role="button">Użyj</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

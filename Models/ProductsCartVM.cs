@@ -9,5 +9,7 @@ namespace WebApplication2.Models
     {
         public IEnumerable<Product> Products { get; set; }
         public IEnumerable<CartItem> Cart { get; set; }
+        public IEnumerable<Bon> Bons { get; set; }
+
     }
 }

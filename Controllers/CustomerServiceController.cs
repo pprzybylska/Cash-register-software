@@ -21,9 +21,11 @@ namespace WebApplication2.Controllers
         {
             var model = new ProductsCartVM();
             IEnumerable<Product> objList = _db.Products;
-            IEnumerable<CartItem> objList1 = _db.Cart;
+            IEnumerable<CartItem> cartList = _db.Cart;
+            IEnumerable<Bon> bonList = _db.Bony;
             model.Products = objList;
-            model.Cart = objList1;
+            model.Cart = cartList;
+            model.Bons = bonList;
 
             return View(model);
         }
@@ -34,6 +36,12 @@ namespace WebApplication2.Controllers
         }
 
         public IActionResult DisplayCart()
+        {
+            return PartialView();
+
+        }
+
+        public IActionResult DisplayBons()
         {
             return PartialView();
 
@@ -66,6 +74,7 @@ namespace WebApplication2.Controllers
                 .Where(p => p.Product.Id == obj.Id)
                 .FirstOrDefault();
                 Itemplus.Amount += 1;
+                Itemplus.Price = Itemplus.Amount * Itemplus.Product.ProductPrice;
                 _db.Cart.Update(Itemplus);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
@@ -76,7 +85,8 @@ namespace WebApplication2.Controllers
                 {
                     Id = default,
                     Product = obj,
-                    Amount = 1
+                    Amount = 1,
+                    Price = obj.ProductPrice
                 };
                 _db.Cart.Add(Item);
                 _db.SaveChanges();
@@ -110,6 +120,30 @@ namespace WebApplication2.Controllers
                 return NotFound();
             }
             _db.Cart.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+
+        public int Sum()
+        {
+            var sum = 0;
+            foreach (var product in _db.Cart)
+            {
+                sum += product.Price;
+            };
+            return sum;
+        }
+
+        public IActionResult UseBon(int? id)
+        {
+            var obj = _db.Bony.Find(id);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
             _db.SaveChanges();
             return RedirectToAction("Index");
 
