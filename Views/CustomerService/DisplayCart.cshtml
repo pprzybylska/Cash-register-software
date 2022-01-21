@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WebApplication2.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nazwa Produktu</th>
+            <th scope="col">Cena Produktu</th>
+            <th scope="col">Ilość</th>
+            <th scope="col">Opcje</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var cartitem in Model)
+        {
+        <tr>
+            <td>@cartitem.Id</td>
+            <td>@cartitem.Product.ProductName</td>
+            <td>@cartitem.Product.ProductPrice</td>
+            <td>@cartitem.Amount</td>
+            <td class="tab">
+                <div class="col-6">
+                    <a asp-controller="CustomerService" asp-action="Delete" asp-route-Id="@cartitem.Id" asp-for="Id" class="btn btn-danger" role="button">Usuń</a>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
