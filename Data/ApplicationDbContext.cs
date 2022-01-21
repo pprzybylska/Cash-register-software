@@ -19,5 +19,7 @@ namespace WebApplication2.Data
         public DbSet<CartItem> Cart { get; set; }
         public DbSet<Bon> Bony { get; set; }
 
+        public DbSet<Bon> Bony { get; set; }
+
     }
 }
