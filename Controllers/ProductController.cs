@@ -63,9 +63,29 @@ namespace WebApplication2.Controllers
         {
             var obj = _db.Products.Find(id);
 
+            var Item = _db.Cart
+            .Where(p => p.Product.Id == obj.Id)
+            .FirstOrDefault();
+
+            var Bon = _db.Bony
+            .Where(p => p.ProductID == obj.Id)
+            .FirstOrDefault();
+
             if (obj == null)
             {
                 return NotFound();
+            }
+
+            if (Item != null)
+            {
+                _db.Cart.Remove(Item);
+                _db.SaveChanges();
+            }
+
+            if (Bon != null)
+            {
+                _db.Bony.Remove(Bon);
+                _db.SaveChanges();
             }
             _db.Products.Remove(obj);
             _db.SaveChanges();

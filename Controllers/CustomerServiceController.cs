@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Threading.Tasks;
 using WebApplication2.Data;
 using WebApplication2.Models;
@@ -38,7 +39,6 @@ namespace WebApplication2.Controllers
         public IActionResult DisplayCart()
         {
             return PartialView();
-
         }
 
         public IActionResult DisplayBons()
@@ -86,7 +86,8 @@ namespace WebApplication2.Controllers
                     Id = default,
                     Product = obj,
                     Amount = 1,
-                    Price = obj.ProductPrice
+                    Price = obj.ProductPrice,
+                    IsBonUsed = "Nie"
                 };
                 _db.Cart.Add(Item);
                 _db.SaveChanges();
@@ -119,6 +120,7 @@ namespace WebApplication2.Controllers
             {
                 return NotFound();
             }
+
             _db.Cart.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
@@ -134,8 +136,25 @@ namespace WebApplication2.Controllers
             };
             return sum;
         }
+    
 
         public IActionResult UseBon(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.Bony.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return UseBonPost(id);
+
+        }
+
+        [HttpPost]
+        public IActionResult UseBonPost(int? id)
         {
             var obj = _db.Bony.Find(id);
 
@@ -144,7 +163,28 @@ namespace WebApplication2.Controllers
                 return NotFound();
             }
 
-            _db.SaveChanges();
+            var Item = _db.Cart
+            .Where(p => p.Product.Id == obj.ProductID)
+            .FirstOrDefault();
+
+            if (Item == null)
+            {
+                return NotFound();
+            }
+
+            if (Item != null)
+            {
+                if (Item.IsBonUsed == "Nie") 
+                { 
+                    Item.IsBonUsed = "Tak";
+                    obj.Used = true;
+                    Item.Price -= obj.Value * Item.Amount;
+                    _db.Cart.Update(Item);
+                    _db.Bony.Update(obj);
+                    _db.SaveChanges();
+                }
+            }
+
             return RedirectToAction("Index");
 
         }

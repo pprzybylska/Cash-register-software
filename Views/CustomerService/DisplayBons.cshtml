@@ -20,7 +20,14 @@
                 <td>@bon.product.ProductName</td>
                 <td class="tab">
                     <div class="col-6">
-                        <a asp-controller="CustomerService" asp-action="UseBon" asp-route-Id="@bon.Id" asp-for="Id" class="btn btn-danger" role="button">Użyj</a>
+                        @if (bon.Used == true)
+                        {
+                            <div class="btn btn-secondary" disabled>Bon zużyty</div>
+                        }
+                        else
+                        {
+                           <a asp-controller="CustomerService" asp-action="UseBon" asp-route-Id="@bon.Id" asp-for="Id" class="btn btn-danger" role="button">Użyj</a>
+                        }
                     </div>
                 </td>
             </tr>

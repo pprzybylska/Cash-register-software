@@ -22,5 +22,6 @@ namespace WebApplication2.Models
         [ForeignKey("ProductID")]
         [Display(Name ="Produkt")]
         public virtual Product product { get; set; }
+        public bool Used { get; set; }
     }
 }

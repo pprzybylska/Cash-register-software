@@ -1,6 +1,5 @@
 ﻿@model WebApplication2.Models.Product
 
-
 @{
     ViewData["Title"] = "Create";
 }
@@ -24,7 +23,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-6">
-                        <input asp-for="ProductName" class="form-control"/>
+                        <input asp-for="ProductName" class="form-control" />
                         <span asp-validation-for="ProductName" class="text-danger"></span>
                     </div>
                     <div class="col-6">
@@ -35,7 +34,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-6 text-center">
-                        <input type="submit" class="btn btn-primary" value="Dodaj produkt"/>
+                        <input type="submit" class="btn btn-primary" value="Dodaj produkt" />
                     </div>
                     <div class="col-6 text-center">
                         <input class="btn btn-success" asp-controller="Product" asp-action="Index" value="Powrót" />

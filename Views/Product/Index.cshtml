@@ -25,7 +25,7 @@
                 <td>@product.ProductPrice</td>
                 <td class="tab">
                     <div class="col-6">
-                        <a asp-controller="Product" asp-action="Update" asp-route-Id="@product.Id"  class="btn btn-primary me-1 text-start" role="button">Zaktualizuj</a>
+                        <a asp-controller="Product" asp-action="Update" asp-route-Id="@product.Id" class="btn btn-primary me-1 text-start" role="button">Zaktualizuj</a>
                         <a asp-controller="Product" asp-action="Delete" asp-route-Id="@product.Id" asp-for="Id" class="btn btn-danger" role="button">Usuń</a>
                     </div>
                 </td>
@@ -33,4 +33,7 @@
         }
     </tbody>
 </table>
+<div class="col-6 text-right">
+    <a asp-controller="Home" asp-action="Admin" class="btn btn-primary">Powrót</a>
+</div>
 

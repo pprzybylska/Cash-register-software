@@ -47,6 +47,7 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(BonVM obj)
         {
+            obj.bon.Used = false;
             if (ModelState.IsValid)
             {
                 _db.Bony.Add(obj.bon);
