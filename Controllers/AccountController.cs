@@ -67,15 +67,16 @@ namespace WebApplication2.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     Name = model.Name,
-                    Surname = model.Surname
+                    Surname = model.Surname,
+                    Transactions = 0
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, model.RoleName);
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Cashiers");
                 }
                 foreach (var error in result.Errors)
                 {

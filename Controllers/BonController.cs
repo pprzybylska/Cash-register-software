@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -42,7 +43,6 @@ namespace WebApplication2.Controllers
 
             return View(expenseVM);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(BonVM obj)
@@ -55,7 +55,6 @@ namespace WebApplication2.Controllers
             }
             return View(obj);
         }
-
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -70,7 +69,6 @@ namespace WebApplication2.Controllers
             obj.product = _db.Products.FirstOrDefault(u => u.Id == obj.ProductID);
             return View(obj);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(Bon obj)
@@ -83,7 +81,6 @@ namespace WebApplication2.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         public IActionResult Update(int? id)
         {
             if (id == null || id == 0)
@@ -104,7 +101,6 @@ namespace WebApplication2.Controllers
             ViewBag.TypeDropDown = TypeDropDown;
             return View(obj);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Update(Bon obj)
