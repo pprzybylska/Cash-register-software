@@ -6,13 +6,18 @@
     <div class="row">
         <div class="row">
 
-            <div class="col">
-                <a asp-controller="Home" asp-action="Admin">Panel Administratora</a>
-            </div>
-
-            <div class="col">
-                <a asp-controller="CustomerService" asp-action="Index">Panel Kasjera</a>
-            </div>
+            @if (User.IsInRole(WebApplication2.Role.Role.Admin))
+            {
+                <div class="col">
+                    <a asp-controller="Home" asp-action="Admin">Panel Administratora</a>
+                </div>
+            }
+            else
+            {
+                <div class="col">
+                    <a asp-controller="CustomerService" asp-action="Index">Panel Kasjera</a>
+                </div>
+            }
         </div>
     </div>
 </div>

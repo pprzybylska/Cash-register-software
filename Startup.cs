@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.Data;
+using Microsoft.AspNetCore.Identity;
+using WebApplication2.Models;
 
 namespace WebApplication2
 {
@@ -29,6 +31,8 @@ namespace WebApplication2
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
             services.AddControllersWithViews();
+
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +54,8 @@ namespace WebApplication2
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
