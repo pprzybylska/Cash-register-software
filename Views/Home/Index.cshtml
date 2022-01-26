@@ -1,28 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Logowanie udane";
-}
-
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<WebApplication2.Models.ApplicationUser> SignInManager
 <div class="container">
-    <div class="row">
-        <div class="row">
 
-            @if (User.IsInRole(WebApplication2.Role.Role.Admin))
-            {
-                <div class="container">
-                    <h2 class="my-5 text-center">Logowanie udane.</h2>
-                    <div class="">
-                        <a class="rounded fs-3 py-3 px-3 btn btn-secondary d-block my-3" asp-controller="Home" asp-action="Admin">Przejdź do panelu administratora.</a>
-                    </div>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        ViewData["Title"] = "Logowanie udane";
+        if (User.IsInRole(WebApplication2.Role.Role.Admin))
+        {
+            <h2 class="my-5 text-center">Witaj, jesteś zalogowany jako administrator.</h2>
+            <div class="">
+                <a class="rounded fs-3 py-3 px-3 btn btn-secondary d-block my-3" asp-controller="Home" asp-action="Admin">Przejdź do panelu administratora.</a>
+            </div>
+        }
+        else
+        {
+            <h2 class="my-5 text-center">Witaj, jesteś zalogowany jako kasjer.</h2>
+            <div class="">
+                <a class="rounded fs-3 py-3 px-3 btn btn-secondary d-block my-3" asp-controller="CustomerService" asp-action="Index">Przejdź do panelu kasjera.</a>
+            </div>
+        }
+    }
+    else
+    {
+        ViewData["Title"] = "Użytkownik niezalogowany";
+        <h2 class="my-5 text-center">Aby kontynuować zaloguj się.</h2>
+        <div class="">
+            <a class="rounded fs-3 py-3 px-3 btn btn-secondary d-block my-3" asp-controller="Account" asp-action="Login">Przejdź do panelu logowania.</a>
+        </div>
 
-                </div>
-            }
-            else
-            {
-                <div class="container">
-                    <h2 class="my-5 text-center">Logowanie udane.</h2>
-                    <div class="">
-                        <a class="rounded fs-3 py-3 px-3 btn btn-secondary d-block my-3" asp-controller="CustomerService" asp-action="">Przejdź do panelu kasjera.</a>
-                    </div>
-
-                </div>
-            }
+    }
+</div>
