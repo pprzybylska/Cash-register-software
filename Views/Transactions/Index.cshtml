@@ -1,0 +1,32 @@
+﻿@model IEnumerable<WebApplication2.Models.Transaction>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Kwota</th>
+            <th scope="col">Zniżka</th>
+            <th scope="col">Opcje</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var transaction in Model)
+        {
+            <tr>
+                <td>@transaction.Id</td>
+                <td>@transaction.Sum</td>
+                <td>@transaction.Discount</td>
+                <td class="tab">
+                    <div class="col-6">
+                        <a asp-controller="Transactions" asp-action="Delete" asp-route-Id="@transaction.Id" asp-for="Id" class="btn btn-danger" role="button">Zwrot</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -73,8 +73,14 @@ namespace WebApplication2.Controllers
                 var Itemplus = _db.Cart
                 .Where(p => p.Product.Id == obj.Id)
                 .FirstOrDefault();
+
                 Itemplus.Amount += 1;
                 Itemplus.Price = Itemplus.Amount * Itemplus.Product.ProductPrice;
+
+                if (Itemplus.IsBonUsed == true)
+                {
+                    Itemplus.Discount += (Itemplus.Discount / (Itemplus.Amount - 1));
+                }
                 _db.Cart.Update(Itemplus);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
@@ -87,7 +93,8 @@ namespace WebApplication2.Controllers
                     Product = obj,
                     Amount = 1,
                     Price = obj.ProductPrice,
-                    IsBonUsed = "Nie"
+                    Discount = 0,
+                    IsBonUsed = false
                 };
                 _db.Cart.Add(Item);
                 _db.SaveChanges();
@@ -174,11 +181,12 @@ namespace WebApplication2.Controllers
 
             if (Item != null)
             {
-                if (Item.IsBonUsed == "Nie") 
+                if (Item.IsBonUsed == false) 
                 { 
-                    Item.IsBonUsed = "Tak";
+                    Item.IsBonUsed = true;
                     obj.Used = true;
                     Item.Price -= obj.Value * Item.Amount;
+                    Item.Discount = obj.Value * Item.Amount;
                     _db.Cart.Update(Item);
                     _db.Bony.Update(obj);
                     _db.SaveChanges();

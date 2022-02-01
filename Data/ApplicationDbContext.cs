@@ -19,5 +19,6 @@ namespace WebApplication2.Data
         public DbSet<Employee> Employees{ get; set; }
         public DbSet<CartItem> Cart{ get; set; }
         public DbSet<Bon> Bony{ get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
     }
 }

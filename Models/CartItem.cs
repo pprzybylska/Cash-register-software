@@ -13,6 +13,7 @@ namespace WebApplication2.Models
         public virtual Product Product { get; set; }
         public int Amount { get; set; }
         public int Price { get; set; }
-        public string IsBonUsed { get; set; }   
+        public int Discount { get; set; }
+        public bool IsBonUsed { get; set; }   
     }
 }

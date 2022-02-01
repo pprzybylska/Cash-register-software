@@ -22,7 +22,7 @@
             <th scope="col">Cena Produktu</th>
             <th scope="col">Ilość</th>
             <th scope="col">Cena</th>
-            <th scope="col">Bon</th>
+            <th scope="col">Zniżka</th>
             <th scope="col">Opcje</th>
         </tr>
     </thead>
@@ -35,7 +35,7 @@
             <td>@cartitem.Product.ProductPrice</td>
             <td>@cartitem.Amount</td>
             <td>@cartitem.Price</td>
-            <td>@cartitem.IsBonUsed</td>
+            <td>@cartitem.Discount</td>
             <td class="tab">
                 <div class="col-6">
                     <a asp-controller="CustomerService" asp-action="Delete" asp-route-Id="@cartitem.Id" asp-for="Id" class="btn btn-danger" role="button">Usuń</a>
@@ -46,3 +46,4 @@
     </tbody>
 </table>
 <div asp-controller="CustomerService" asp-action="GetSum" class="text-center fs-3">Suma: @Sum()</div>
+<a asp-controller="Transactions" asp-action="FinalizeGet" class="btn btn-primary">Finalizuj</a>
