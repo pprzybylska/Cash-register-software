@@ -45,5 +45,9 @@
         }
     </tbody>
 </table>
-<div asp-controller="CustomerService" asp-action="GetSum" class="text-center fs-3">Suma: @Sum()</div>
-<a asp-controller="Transactions" asp-action="FinalizeGet" class="btn btn-primary">Finalizuj</a>
+<div class="w-100 text-center">
+    <div asp-controller="CustomerService" asp-action="GetSum" class="fs-1 mt-3">Suma: @Sum()</div>
+    <div class="d-flex d-block justify-content-center w100 mt-3">
+        <a asp-controller="Transactions" asp-action="FinalizeGet" class=" btn btn-primary text-center w-25">Finalizuj</a>
+    </div>
+</div>

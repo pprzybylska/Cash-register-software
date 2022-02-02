@@ -8,14 +8,15 @@
         {
             <h2 class="my-5 text-center">Witaj, jesteś zalogowany jako administrator.</h2>
             <div class="">
-                <a class="rounded fs-3 py-3 px-3 btn btn-secondary d-block my-3" asp-controller="Home" asp-action="Admin">Przejdź do panelu administratora.</a>
+                <a class="rounded fs-3 py-3 px-3 btn btn-secondary d-block my-3" asp-controller="Home" asp-action="Admin">Przejdź do panelu administratora</a>
+                <a class="rounded fs-3 py-3 px-3 btn btn-secondary d-block my-3" asp-controller="CustomerService" asp-action="Index">Przejdź do panelu kasjera</a>
             </div>
         }
         else
         {
             <h2 class="my-5 text-center">Witaj, jesteś zalogowany jako kasjer.</h2>
             <div class="">
-                <a class="rounded fs-3 py-3 px-3 btn btn-secondary d-block my-3" asp-controller="CustomerService" asp-action="Index">Przejdź do panelu kasjera.</a>
+                <a class="rounded fs-3 py-3 px-3 btn btn-secondary d-block my-3" asp-controller="CustomerService" asp-action="Index">Przejdź do panelu kasjera</a>
             </div>
         }
     }
