@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +10,16 @@ using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TransactionsController : Controller
     {
         private readonly ApplicationDbContext _db;
+        UserManager<ApplicationUser> _userManager;
 
-        public TransactionsController(ApplicationDbContext db)
+        public TransactionsController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
             _db = db;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -25,11 +30,11 @@ namespace WebApplication2.Controllers
         public IActionResult FinalizeGet()
         {
             IEnumerable<CartItem> objList = _db.Cart;
-            return FinalizePost(objList);
+            return (IActionResult)FinalizePost(objList);// dodalem (IActionResult) bo tak kazal vs
         }
 
         [HttpPost]
-        public IActionResult FinalizePost(IEnumerable<CartItem> objList)
+        public async Task<IActionResult> FinalizePost(IEnumerable<CartItem> objList)
         {
             int sum = 0, discount = 0;
             string name;
@@ -46,6 +51,11 @@ namespace WebApplication2.Controllers
             .Where(p => p.UserName == name)
             .FirstOrDefault();
 
+            //powiekszenie ilosci transkacji zalogowanego kasjera
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            user.Transactions++;
+            await _userManager.UpdateAsync(user);
+            // sprawdz czy to dodalem do dobrej akcji
             Transaction NewTransaction = new();
             NewTransaction.Sum = sum;
             NewTransaction.Discount = discount;

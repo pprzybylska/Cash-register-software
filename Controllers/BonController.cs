@@ -11,6 +11,7 @@ using WebApplication2.Models.ViewModel;
 
 namespace WebApplication2.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class BonController : Controller
     {
         private readonly ApplicationDbContext _db;

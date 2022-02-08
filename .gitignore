@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Migrations/20220208220711_transactionsforadrian.Designer.cs
+/Migrations/20220208220711_transactionsforadrian.cs
