@@ -27,10 +27,10 @@ namespace WebApplication2.Controllers
             IEnumerable<Transaction> objList = _db.Transactions;
             return View(objList);
         }
-        public IActionResult FinalizeGet()
+        public Task<IActionResult> FinalizeGet()
         {
             IEnumerable<CartItem> objList = _db.Cart;
-            return (IActionResult)FinalizePost(objList);// dodalem (IActionResult) bo tak kazal vs
+            return FinalizePost(objList);// dodalem (IActionResult) bo tak kazal vs
         }
 
         [HttpPost]
