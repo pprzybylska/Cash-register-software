@@ -17,7 +17,6 @@
                     <th scope="col">Imię</th>
                     <th scope="col">Nazwisko</th>
                     <th scope="col">E-mail</th>
-                    <th scope="col">Liczba transakcji</th>
                     <th scope="col">Opcje</th>
                 </tr>
             </thead>
@@ -29,12 +28,12 @@
                     <td>@item.Name</td>
                     <td>@item.Surname</td>
                     <td>@item.Email</td>
-                    <td>@item.Transactions</td>
 
                     <td class="tab">
-                        <div class="col-6">
+                        <div class="col-4">
                             <a asp-controller="Cashiers" asp-action="Update" asp-route-Id="@item.Id" class="btn btn-primary me-1 text-start" role="button">Zmień</a>
                             <a asp-controller="Cashiers" asp-action="Delete" asp-route-Id="@item.Id" asp-for="Id" class="btn btn-danger" role="button">Usuń</a>
+                            <a asp-controller="Cashiers" asp-action="ChangePassword" asp-route-Id="@item.Id" asp-for="Id" class="btn btn-danger" role="button">Zmień hasło</a>
                         </div>
                     </td>
                 </tr>
