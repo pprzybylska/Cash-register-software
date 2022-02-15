@@ -30,10 +30,10 @@
                     <td>@item.Email</td>
 
                     <td class="tab">
-                        <div class="col-4">
-                            <a asp-controller="Cashiers" asp-action="Update" asp-route-Id="@item.Id" class="btn btn-primary me-1 text-start" role="button">Zmień</a>
-                            <a asp-controller="Cashiers" asp-action="Delete" asp-route-Id="@item.Id" asp-for="Id" class="btn btn-danger" role="button">Usuń</a>
-                            <a asp-controller="Cashiers" asp-action="ChangePassword" asp-route-Id="@item.Id" asp-for="Id" class="btn btn-danger" role="button">Zmień hasło</a>
+                        <div class="">
+                            <a asp-controller="Cashiers" asp-action="Update" asp-route-Id="@item.Id" class="btn btn-primary me-1 text-start col-3" role="button">Zmień</a>
+                            <a asp-controller="Cashiers" asp-action="Delete" asp-route-Id="@item.Id" asp-for="Id" class="btn btn-danger col-3" role="button">Usuń</a>
+                            <a asp-controller="Cashiers" asp-action="ChangePassword" asp-route-Id="@item.Id" asp-for="Id" class="btn btn-danger col-3" role="button">Zmień hasło</a>
                         </div>
                     </td>
                 </tr>
